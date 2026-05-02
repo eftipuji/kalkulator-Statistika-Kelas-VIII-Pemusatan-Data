@@ -15,7 +15,7 @@ st.set_page_config(
 )
 
 # ─────────────────────────────────────────
-# CSS KUSTOM (Konsisten dengan gaya sebelumnya)
+# CSS KUSTOM (Gaya Visual Efti Puji Lestari)
 # ─────────────────────────────────────────
 st.markdown("""
 <style>
@@ -54,7 +54,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # ─────────────────────────────────────────
-# SIDEBAR
+# SIDEBAR NAVIGATION
 # ─────────────────────────────────────────
 with st.sidebar:
     st.markdown('<div style="background:#1A3C6E;color:white;padding:0.7rem;border-radius:10px;font-weight:800;text-align:center;">🧭 Menu Navigasi</div>', unsafe_allow_html=True)
@@ -63,7 +63,7 @@ with st.sidebar:
     st.markdown(f"""
     <div style="font-size:0.78rem;color:#7F7F7F;text-align:center;">
     🎓 Kurikulum Merdeka Fase D<br>
-    Penulis: Efti Puji Lestari
+    Penulis: Efti Puji Lestari[cite: 1]
     </div>
     """, unsafe_allow_html=True)
 
@@ -72,7 +72,7 @@ with st.sidebar:
 # ══════════════════════════════════════════
 if tab_choice == "🏠 Beranda":
     st.markdown("## 👋 Selamat Datang, Detektif Data!")
-    st.write("Hari ini kita akan mempelajari bagaimana cara meringkas sekumpulan data menjadi satu angka yang representatif menggunakan Mean, Median, dan Modus.")
+    st.write("Hari ini kita akan mempelajari bagaimana cara meringkas sekumpulan data menjadi satu angka yang representatif menggunakan Mean, Median, dan Modus[cite: 1].")
     
     col1, col2 = st.columns(2)
     with col1:
@@ -81,7 +81,7 @@ if tab_choice == "🏠 Beranda":
         <b>🎯 Tujuan Pembelajaran:</b><br>
         1. Menghitung Mean, Median, dan Modus data tunggal.<br>
         2. Menginterpretasi data dari tabel frekuensi.<br>
-        3. Memilih ukuran pemusatan yang tepat sesuai konteks data.
+        3. Memilih ukuran pemusatan yang tepat sesuai konteks data[cite: 1].
         </div>
         """, unsafe_allow_html=True)
     with col2:
@@ -96,16 +96,16 @@ elif tab_choice == "🔍 KP 1 — Mean (Rata-rata)":
     st.markdown("""
     <div class="fase-box">
         <div class="fase-label">① Stimulation — Pemantik</div>
-        <div class="fase-text">Jika nilai ulanganmu adalah 70, 80, dan 90, berapa nilai rata-ratamu?</div>
+        <div class="fase-text">Jika nilai ulanganmu adalah 70, 80, dan 90, berapa nilai rata-ratamu?[cite: 1]</div>
     </div>
     """, unsafe_allow_html=True)
 
     st.markdown("### ⌨️ Input Data")
-    input_data = st.text_input("Masukkan data (pisahkan dengan koma):", "70, 80, 90")
+    input_data = st.text_input("Masukkan data (pisahkan dengan koma):", "70, 80, 90")[cite: 1]
     
     try:
-        data = [float(x.strip()) for x in input_data.split(",")]
-        rata_rata = mean(data)
+        data = [float(x.strip()) for x in input_data.split(",")][cite: 1]
+        rata_rata = mean(data)[cite: 1]
         
         col1, col2 = st.columns([1, 1])
         with col1:
@@ -127,7 +127,7 @@ elif tab_choice == "🔍 KP 1 — Mean (Rata-rata)":
             """, unsafe_allow_html=True)
             
     except ValueError:
-        st.error("Format salah! Gunakan angka dan koma (contoh: 70, 85, 90)")
+        st.error("Format salah! Gunakan angka dan koma (contoh: 70, 85, 90)")[cite: 1]
 
 # ══════════════════════════════════════════
 # KP 2 — MEDIAN & MODUS
@@ -135,14 +135,14 @@ elif tab_choice == "🔍 KP 1 — Mean (Rata-rata)":
 elif tab_choice == "⚖️ KP 2 — Median & Modus":
     st.markdown("## ⚖️ Kegiatan 2: Median (Nilai Tengah) & Modus")
     
-    input_data = st.text_input("Masukkan data untuk dianalisis:", "65, 70, 75, 75, 80")
+    input_data = st.text_input("Masukkan data untuk dianalisis:", "65, 70, 75, 75, 80")[cite: 1]
     
     try:
-        data = sorted([float(x.strip()) for x in input_data.split(",")])
-        med = median(data)
-        mod = multimode(data)
+        data = sorted([float(x.strip()) for x in input_data.split(",")])[cite: 1]
+        med = median(data)[cite: 1]
+        mod = multimode(data)[cite: 1]
         
-        st.write(f"**Data Terurut:** {', '.join(map(str, data))}")
+        st.write(f"**Data Terurut:** {', '.join(map(str, data))}")[cite: 1]
         
         c1, c2 = st.columns(2)
         with c1:
@@ -159,11 +159,11 @@ elif tab_choice == "⚖️ KP 2 — Median & Modus":
             </div>""", unsafe_allow_html=True)
             st.caption("Modus adalah nilai yang paling sering muncul[cite: 1].")
             
-    except Exception as e:
-        st.warning("Silakan masukkan data yang valid.")
+    except Exception:
+        st.warning("Silakan masukkan data yang valid.")[cite: 1]
 
 # ══════════════════════════════════════════
-# EKSPLORASI DATA
+# EKSPLORASI DATA (DINAMIS)
 # ══════════════════════════════════════════
 elif tab_choice == "📈 Eksplorasi Data":
     st.markdown("## 📈 Visualisasi & Interpretasi Data")
@@ -171,30 +171,51 @@ elif tab_choice == "📈 Eksplorasi Data":
     st.markdown("""
     <div class="fase-box" style="border-color:#70AD47; background:#F0FBF0;">
         <div class="fase-label" style="color:#70AD47;">③ Data Collection — Eksplorasi</div>
-        <div class="fase-text">Mari kita lihat bagaimana distribusi data dalam bentuk diagram batang[cite: 1].</div>
+        <div class="fase-text">Mari kita kumpulkan data! Masukkan daftar nilai dan frekuensinya untuk melihat distribusi data dalam bentuk diagram batang[cite: 1].</div>
     </div>
     """, unsafe_allow_html=True)
 
-    # Contoh data tabel frekuensi dari RPP[cite: 1]
-    df = pd.DataFrame({
-        'Nilai': [60, 65, 70, 75, 80, 85, 90],
-        'Frekuensi': [2, 3, 5, 8, 7, 4, 1]
-    })
+    st.write("### 📝 Input Tabel Frekuensi")
     
-    st.write("### Tabel Frekuensi Nilai Ulangan")
-    st.table(df.T)
-    
-    # Visualisasi
-    fig, ax = plt.subplots(figsize=(8, 4))
-    ax.bar(df['Nilai'].astype(str), df['Frekuensi'], color='#2E75B6')
-    ax.set_ylabel('Banyak Siswa')
-    ax.set_xlabel('Nilai')
-    ax.set_title('Diagram Batang Nilai Ulangan')
-    st.pyplot(fig)
-    
-    with st.expander("🔍 Lihat Analisis Detektif"):
+    col_input1, col_input2 = st.columns(2)
+    with col_input1:
+        input_nilai = st.text_input("Masukkan Daftar Nilai (pisah dengan koma):", "60, 70, 80, 90")[cite: 1]
+    with col_input2:
+        input_frek = st.text_input("Masukkan Frekuensi (pisah dengan koma):", "2, 5, 8, 3")[cite: 1]
+
+    try:
+        list_nilai = [float(x.strip()) for x in input_nilai.split(",")][cite: 1]
+        list_frek = [int(x.strip()) for x in input_frek.split(",")][cite: 1]
+
+        if len(list_nilai) == len(list_frek):
+            df_input = pd.DataFrame({
+                'Nilai': list_nilai,
+                'Frekuensi': list_frek
+            })[cite: 1]
+            
+            st.write("#### 📋 Tabel Frekuensi Hasil Input")
+            st.table(df_input.T)[cite: 1]
+            
+            st.write("#### 📊 Visualisasi Data")
+            fig, ax = plt.subplots(figsize=(8, 4))
+            ax.bar(df_input['Nilai'].astype(str), df_input['Frekuensi'], color='#70AD47')[cite: 1]
+            ax.set_ylabel('Banyak Siswa (Frekuensi)')[cite: 1]
+            ax.set_xlabel('Nilai')[cite: 1]
+            ax.set_title('Diagram Batang Data Siswa')[cite: 1]
+            st.pyplot(fig)[cite: 1]
+
+            total_siswa = sum(list_frek)[cite: 1]
+            st.success(f"✅ Data berhasil diproses! Total data (n) = {total_siswa} siswa.")[cite: 1]
+            
+        else:
+            st.error("⚠️ Jumlah 'Nilai' dan 'Frekuensi' harus sama! Contoh: Jika ada 4 nilai, maka harus ada 4 frekuensi juga.")[cite: 1]
+            
+    except ValueError:
+        st.warning("⚠️ Pastikan input hanya berupa angka yang dipisahkan dengan koma.")[cite: 1]
+
+    with st.expander("🔍 Petunjuk Detektif"):
         st.markdown("""
-        1. **Modus:** Nilai 75 (muncul 8 kali).
-        2. **Mean:** 75.17 (rata-rata penguasaan materi cukup baik).
-        3. **Interpretasi:** Sebagian besar siswa berada di level nilai 75-80[cite: 1].
+        *   **Langkah 1:** Masukkan urutan nilai pada kolom kiri[cite: 1].
+        *   **Langkah 2:** Masukkan berapa orang yang mendapat nilai tersebut pada kolom kanan[cite: 1].
+        *   **Langkah 3:** Amati bagaimana bentuk diagram batang berubah setiap kali kamu mengganti angka![cite: 1]
         """)
