@@ -15,7 +15,7 @@ st.set_page_config(
 )
 
 # ─────────────────────────────────────────
-# CSS KUSTOM (Gaya Visual Efti Puji Lestari)
+# CSS KUSTOM
 # ─────────────────────────────────────────
 st.markdown("""
 <style>
@@ -63,7 +63,7 @@ with st.sidebar:
     st.markdown(f"""
     <div style="font-size:0.78rem;color:#7F7F7F;text-align:center;">
     🎓 Kurikulum Merdeka Fase D<br>
-    Penulis: Efti Puji Lestari[cite: 1]
+    Penulis: Efti Puji Lestari
     </div>
     """, unsafe_allow_html=True)
 
@@ -72,7 +72,7 @@ with st.sidebar:
 # ══════════════════════════════════════════
 if tab_choice == "🏠 Beranda":
     st.markdown("## 👋 Selamat Datang, Detektif Data!")
-    st.write("Hari ini kita akan mempelajari bagaimana cara meringkas sekumpulan data menjadi satu angka yang representatif menggunakan Mean, Median, dan Modus[cite: 1].")
+    st.write("Mari meringkas data menjadi satu angka representatif dengan Mean, Median, dan Modus.")
     
     col1, col2 = st.columns(2)
     with col1:
@@ -85,137 +85,90 @@ if tab_choice == "🏠 Beranda":
         </div>
         """, unsafe_allow_html=True)
     with col2:
-        st.info("Gunakan navigasi di samping untuk mulai bereksplorasi!")
+        st.info("Gunakan navigasi di samping untuk mulai!")
 
 # ══════════════════════════════════════════
 # KP 1 — MEAN
 # ══════════════════════════════════════════
 elif tab_choice == "🔍 KP 1 — Mean (Rata-rata)":
     st.markdown("## 🔍 Kegiatan 1: Konsep Mean (Rata-rata)")
-    
-    st.markdown("""
-    <div class="fase-box">
-        <div class="fase-label">① Stimulation — Pemantik</div>
-        <div class="fase-text">Jika nilai ulanganmu adalah 70, 80, dan 90, berapa nilai rata-ratamu?[cite: 1]</div>
-    </div>
-    """, unsafe_allow_html=True)
+    st.markdown('<div class="fase-box"><div class="fase-label">① Stimulation</div>Jika nilaimu 70, 80, dan 90, berapa rata-ratanya?[cite: 1]</div>', unsafe_allow_html=True)
 
-    st.markdown("### ⌨️ Input Data")
-    input_data = st.text_input("Masukkan data (pisahkan dengan koma):", "70, 80, 90")[cite: 1]
+    input_data = st.text_input("Masukkan data (pisahkan dengan koma):", "70, 80, 90")
     
-    try:
-        data = [float(x.strip()) for x in input_data.split(",")][cite: 1]
-        rata_rata = mean(data)[cite: 1]
-        
-        col1, col2 = st.columns([1, 1])
-        with col1:
-            st.markdown(f"""
-            <div class="result-display">
-                <div style="font-size:0.8rem; opacity:0.9;">Hasil Mean (x̄)</div>
-                <div style="font-size:2.5rem;">{rata_rata:.2f}</div>
-            </div>
-            """, unsafe_allow_html=True)
-        
-        with col2:
-            st.markdown(f"""
-            <div class="info-card">
-            <b>Rumus:</b><br>
-            x̄ = Σx / n[cite: 1]<br><br>
-            <b>Proses:</b><br>
-            ({ ' + '.join(map(str, data)) }) / {len(data)} = {rata_rata:.2f}
-            </div>
-            """, unsafe_allow_html=True)
+    if input_data:
+        try:
+            # Membersihkan spasi dan mengabaikan koma di akhir kalimat
+            clean_input = input_data.strip().strip(",")
+            data = [float(x.strip()) for x in clean_input.split(",") if x.strip() != ""][cite: 1]
             
-    except ValueError:
-        st.error("Format salah! Gunakan angka dan koma (contoh: 70, 85, 90)")[cite: 1]
+            if data:
+                rata_rata = mean(data)[cite: 1]
+                col1, col2 = st.columns(2)
+                with col1:
+                    st.markdown(f'<div class="result-display"><div style="font-size:0.8rem;">Mean (x̄)</div><div style="font-size:2.5rem;">{rata_rata:.2f}</div></div>', unsafe_allow_html=True)
+                with col2:
+                    st.markdown(f'<div class="info-card"><b>Proses:</b><br>({ " + ".join(map(str, data)) }) / {len(data)} = {rata_rata:.2f}</div>', unsafe_allow_html=True)
+        except ValueError:
+            st.error("⚠️ Gunakan format angka yang benar (contoh: 70, 85, 90)[cite: 1]")
 
 # ══════════════════════════════════════════
 # KP 2 — MEDIAN & MODUS
 # ══════════════════════════════════════════
 elif tab_choice == "⚖️ KP 2 — Median & Modus":
-    st.markdown("## ⚖️ Kegiatan 2: Median (Nilai Tengah) & Modus")
+    st.markdown("## ⚖️ Kegiatan 2: Median & Modus")
+    input_data = st.text_input("Masukkan data:", "65, 70, 75, 75, 80")
     
-    input_data = st.text_input("Masukkan data untuk dianalisis:", "65, 70, 75, 75, 80")[cite: 1]
-    
-    try:
-        data = sorted([float(x.strip()) for x in input_data.split(",")])[cite: 1]
-        med = median(data)[cite: 1]
-        mod = multimode(data)[cite: 1]
-        
-        st.write(f"**Data Terurut:** {', '.join(map(str, data))}")[cite: 1]
-        
-        c1, c2 = st.columns(2)
-        with c1:
-            st.markdown(f"""<div class="result-display">
-                <div style="font-size:0.8rem;">Median</div>
-                <div style="font-size:2.2rem;">{med}</div>
-            </div>""", unsafe_allow_html=True)
-            st.caption("Median adalah nilai tengah setelah data diurutkan[cite: 1].")
+    if input_data:
+        try:
+            clean_input = input_data.strip().strip(",")
+            data = sorted([float(x.strip()) for x in clean_input.split(",") if x.strip() != ""])[cite: 1]
             
-        with c2:
-            st.markdown(f"""<div class="result-display" style="background:linear-gradient(135deg, #70AD47, #2E75B6);">
-                <div style="font-size:0.8rem;">Modus</div>
-                <div style="font-size:2.2rem;">{', '.join(map(str, mod))}</div>
-            </div>""", unsafe_allow_html=True)
-            st.caption("Modus adalah nilai yang paling sering muncul[cite: 1].")
-            
-    except Exception:
-        st.warning("Silakan masukkan data yang valid.")[cite: 1]
+            if data:
+                med = median(data)[cite: 1]
+                mod = multimode(data)[cite: 1]
+                st.write(f"**Data Terurut:** {', '.join(map(str, data))}")
+                
+                c1, c2 = st.columns(2)
+                with c1:
+                    st.markdown(f'<div class="result-display"><div style="font-size:0.8rem;">Median</div><div style="font-size:2.2rem;">{med}</div></div>', unsafe_allow_html=True)
+                with c2:
+                    st.markdown(f'<div class="result-display" style="background:linear-gradient(135deg, #70AD47, #2E75B6);"><div style="font-size:0.8rem;">Modus</div><div style="font-size:2.2rem;">{", ".join(map(str, mod))}</div></div>', unsafe_allow_html=True)
+        except Exception:
+            st.error("⚠️ Input tidak valid[cite: 1]")
 
 # ══════════════════════════════════════════
-# EKSPLORASI DATA (DINAMIS)
+# EKSPLORASI DATA
 # ══════════════════════════════════════════
 elif tab_choice == "📈 Eksplorasi Data":
     st.markdown("## 📈 Visualisasi & Interpretasi Data")
-    
-    st.markdown("""
-    <div class="fase-box" style="border-color:#70AD47; background:#F0FBF0;">
-        <div class="fase-label" style="color:#70AD47;">③ Data Collection — Eksplorasi</div>
-        <div class="fase-text">Mari kita kumpulkan data! Masukkan daftar nilai dan frekuensinya untuk melihat distribusi data dalam bentuk diagram batang[cite: 1].</div>
-    </div>
-    """, unsafe_allow_html=True)
+    st.markdown('<div class="fase-box" style="border-color:#70AD47; background:#F0FBF0;"><div class="fase-label" style="color:#70AD47;">③ Data Collection</div>Masukkan nilai dan frekuensi![cite: 1]</div>', unsafe_allow_html=True)
 
-    st.write("### 📝 Input Tabel Frekuensi")
-    
     col_input1, col_input2 = st.columns(2)
     with col_input1:
-        input_nilai = st.text_input("Masukkan Daftar Nilai (pisah dengan koma):", "60, 70, 80, 90")[cite: 1]
+        input_nilai = st.text_input("Daftar Nilai (pisah koma):", "60, 70, 80, 90")
     with col_input2:
-        input_frek = st.text_input("Masukkan Frekuensi (pisah dengan koma):", "2, 5, 8, 3")[cite: 1]
+        input_frek = st.text_input("Frekuensi (pisah koma):", "2, 5, 8, 3")
 
-    try:
-        list_nilai = [float(x.strip()) for x in input_nilai.split(",")][cite: 1]
-        list_frek = [int(x.strip()) for x in input_frek.split(",")][cite: 1]
+    if input_nilai and input_frek:
+        try:
+            list_nilai = [float(x.strip()) for x in input_nilai.strip().strip(",").split(",") if x.strip() != ""][cite: 1]
+            list_frek = [int(x.strip()) for x in input_frek.strip().strip(",").split(",") if x.strip() != ""][cite: 1]
 
-        if len(list_nilai) == len(list_frek):
-            df_input = pd.DataFrame({
-                'Nilai': list_nilai,
-                'Frekuensi': list_frek
-            })[cite: 1]
-            
-            st.write("#### 📋 Tabel Frekuensi Hasil Input")
-            st.table(df_input.T)[cite: 1]
-            
-            st.write("#### 📊 Visualisasi Data")
-            fig, ax = plt.subplots(figsize=(8, 4))
-            ax.bar(df_input['Nilai'].astype(str), df_input['Frekuensi'], color='#70AD47')[cite: 1]
-            ax.set_ylabel('Banyak Siswa (Frekuensi)')[cite: 1]
-            ax.set_xlabel('Nilai')[cite: 1]
-            ax.set_title('Diagram Batang Data Siswa')[cite: 1]
-            st.pyplot(fig)[cite: 1]
-
-            total_siswa = sum(list_frek)[cite: 1]
-            st.success(f"✅ Data berhasil diproses! Total data (n) = {total_siswa} siswa.")[cite: 1]
-            
-        else:
-            st.error("⚠️ Jumlah 'Nilai' dan 'Frekuensi' harus sama! Contoh: Jika ada 4 nilai, maka harus ada 4 frekuensi juga.")[cite: 1]
-            
-    except ValueError:
-        st.warning("⚠️ Pastikan input hanya berupa angka yang dipisahkan dengan koma.")[cite: 1]
-
-    with st.expander("🔍 Petunjuk Detektif"):
-        st.markdown("""
-        *   **Langkah 1:** Masukkan urutan nilai pada kolom kiri[cite: 1].
-        *   **Langkah 2:** Masukkan berapa orang yang mendapat nilai tersebut pada kolom kanan[cite: 1].
-        *   **Langkah 3:** Amati bagaimana bentuk diagram batang berubah setiap kali kamu mengganti angka![cite: 1]
-        """)
+            if len(list_nilai) == len(list_frek):
+                df_input = pd.DataFrame({'Nilai': list_nilai, 'Frekuensi': list_frek})[cite: 1]
+                st.write("#### 📋 Tabel Frekuensi")
+                st.table(df_input.T)[cite: 1]
+                
+                # Visualisasi
+                fig, ax = plt.subplots(figsize=(8, 4))
+                ax.bar(df_input['Nilai'].astype(str), df_input['Frekuensi'], color='#70AD47')[cite: 1]
+                ax.set_ylabel('Frekuensi')
+                ax.set_xlabel('Nilai')
+                st.pyplot(fig)[cite: 1]
+                
+                st.success(f"✅ Total data (n) = {sum(list_frek)} siswa[cite: 1]")
+            else:
+                st.warning("⚠️ Jumlah Nilai dan Frekuensi harus sama![cite: 1]")
+        except ValueError:
+            st.error("⚠️ Masukkan angka saja yang dipisahkan koma[cite: 1]")
